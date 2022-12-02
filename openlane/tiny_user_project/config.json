@@ -2,10 +2,8 @@
     "DESIGN_NAME": "tiny_user_project",
     "DESIGN_IS_CORE": 0,
     "VERILOG_FILES": [
-        "dir::../../verilog/rtl/tiny_user_project.v"
         "dir::../../verilog/rtl/top.v",
         "dir::../../verilog/rtl/scanchain.v",
-        "dir::../../verilog/rtl/wb_mux.v",
         "dir::../../verilog/blocks/serv/rtl/serv_top.v",
         "dir::../../verilog/blocks/serv/rtl/serv_synth_wrapper.v",
         "dir::../../verilog/blocks/serv/rtl/serv_mem_if.v",
@@ -21,7 +19,9 @@
         "dir::../../verilog/blocks/serv/rtl/serv_csr.v",
         "dir::../../verilog/blocks/serv/servant/servant_arbiter.v",
         "dir::../../verilog/blocks/serv/servant/servant_mux.v",
-        "dir::../../verilog/blocks/serv/servant/servant_gpio.v"
+        "dir::../../verilog/blocks/serv/servant/servant_gpio.v",
+        "dir::../../verilog/rtl/defines.v",
+        "dir::../../verilog/rtl/tiny_user_project.v"
     ],
     "CLOCK_PERIOD": 24,
     "CLOCK_PORT": "",
@@ -41,7 +41,7 @@
     "RUN_CVC": 1,
     "RUN_KLAYOUT_XOR": 0,
     "RUN_KLAYOUT_DRC": 0,
-    "SYNTH_READ_BLACKBOX_LIB": 0, 
+    "SYNTH_READ_BLACKBOX_LIB": 0,
     "pdk::gf180mcuC": {
         "STD_CELL_LIBRARY": "gf180mcu_fd_sc_mcu7t5v0",
         "RT_MAX_LAYER": "Metal4",
