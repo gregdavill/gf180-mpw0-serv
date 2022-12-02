@@ -6,11 +6,9 @@ module scanchain_local #(
     input wire clk_in,
     input wire data_in,
     input wire scan_select_in,
-    input wire latch_enable_in,
     output wire clk_out,
     output wire data_out,
     output wire scan_select_out,
-    output wire latch_enable_out,
 
     // io, names from point of view of the user module
     input wire [SCAN_LENGTH-1:0] module_data_out,
@@ -21,19 +19,15 @@ module scanchain_local #(
   // Looking at results from multiple projects the buffering is a bit
   // inconsistent. So instead, we ensure at least clk buf
   wire clk;
-  always @(*) begin
-    clk <= clk_in;
-  end
+  assign clk = clk_in;
 
   // output buffers
   // Same as for input, to try and be more consistent, we make our own
   wire data_out_i;
-  always @(*) begin
-    clk_out <= clk;
-    data_out <= data_out_i;
-    scan_select_out <= scan_select_in;
-    latch_enable_out <= latch_enable_in;
-  end
+
+  assign clk_out = clk;
+  assign data_out = data_out_i;
+  assign scan_select_out = scan_select_in;
 
 
   // wires needed

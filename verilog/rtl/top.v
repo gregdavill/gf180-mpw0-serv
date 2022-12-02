@@ -11,7 +11,7 @@ module gregdavill_serv_top(
 
   wire data =         io_in[2];
   wire scan_select =  io_in[3];
-  wire serv_clk =     io_in[5];
+  wire serv_clk =     io_in[4];
 
   wire timer_irq;
 
@@ -27,14 +27,6 @@ module gregdavill_serv_top(
   wire 	wb_dbus_we;
   wire 	wb_dbus_cyc;
   wire 	wb_dbus_ack;
-
-  wire [31:0] 	wb_dmem_adr;
-  wire [31:0] 	wb_dmem_dat;
-  wire [3:0] 	wb_dmem_sel;
-  wire [31:0] 	wb_dmem_rdt;
-  wire 	wb_dmem_we;
-  wire 	wb_dmem_cyc;
-  wire 	wb_dmem_ack;
 
   wire [31:0] 	wb_mem_adr;
   wire [31:0] 	wb_mem_dat;
@@ -69,32 +61,34 @@ module gregdavill_serv_top(
 
 
 
-module serv_rf_top
-  #(.RESET_PC(32'd0),
+  serv_rf_top #(
+    .RESET_PC(32'd0),
     .COMPRESSED(1),
     .ALIGN(1),
     .MDU(0),
     .PRE_REGISTER(1),
-    .RESET_STRATEGY = "MINI",
+    .RESET_STRATEGY("MINI"),
     .WITH_CSR(1),
-    .RF_WIDTH(2),
-	(
-   input wire 	      serv_clk,
-   input wire 	      i_rst,
-   input wire 	      i_timer_irq,
+    .RF_WIDTH(2))
+  u_cpu
+  (
+    .clk          (serv_clk),
+    .i_rst        (reset),
+    .i_timer_irq  (timer_irq),
 
-   output wire [31:0] o_ibus_adr,
-   output wire 	      o_ibus_cyc,
-   input wire [31:0]  i_ibus_rdt,
-   input wire 	      i_ibus_ack,
-   output wire [31:0] o_dbus_adr,
-   output wire [31:0] o_dbus_dat,
-   output wire [3:0]  o_dbus_sel,
-   output wire 	      o_dbus_we ,
-   output wire 	      o_dbus_cyc,
-   input wire [31:0]  i_dbus_rdt,
-   input wire 	      i_dbus_ack,
-   );
+    .o_ibus_adr   (wb_ibus_adr),
+    .o_ibus_cyc   (wb_ibus_cyc),
+    .i_ibus_rdt   (wb_ibus_rdt),
+    .i_ibus_ack   (wb_ibus_ack),
+
+    .o_dbus_adr   (wb_dbus_adr),
+    .o_dbus_dat   (wb_dbus_dat),
+    .o_dbus_sel   (wb_dbus_sel),
+    .o_dbus_we    (wb_dbus_we),
+    .o_dbus_cyc   (wb_dbus_cyc),
+    .i_dbus_rdt   (wb_dbus_rdt),
+    .i_dbus_ack   (wb_dbus_ack)
+  );
 
 
   scanchain_local #(

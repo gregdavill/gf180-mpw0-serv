@@ -9,6 +9,8 @@ project:
     - verilog/blocks/serv/rtl/serv_synth_wrapper.v
     - verilog/blocks/serv/rtl/serv_mem_if.v
     - verilog/blocks/serv/rtl/serv_rf_if.v
+    - verilog/blocks/serv/rtl/serv_rf_top.v
+    - verilog/blocks/serv/rtl/serv_rf_ram.v
     - verilog/blocks/serv/rtl/serv_rf_ram_if.v
     - verilog/blocks/serv/rtl/serv_alu.v
     - verilog/blocks/serv/rtl/serv_ctrl.v
@@ -16,6 +18,8 @@ project:
     - verilog/blocks/serv/rtl/serv_bufreg.v
     - verilog/blocks/serv/rtl/serv_immdec.v
     - verilog/blocks/serv/rtl/serv_decode.v
+    - verilog/blocks/serv/rtl/serv_compdec.v
+    - verilog/blocks/serv/rtl/serv_aligner.v
     - verilog/blocks/serv/rtl/serv_state.v
     - verilog/blocks/serv/rtl/serv_csr.v
     - verilog/blocks/serv/servant/servant_arbiter.v

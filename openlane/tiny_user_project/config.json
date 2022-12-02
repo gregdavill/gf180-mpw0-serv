@@ -8,6 +8,8 @@
         "dir::../../verilog/blocks/serv/rtl/serv_synth_wrapper.v",
         "dir::../../verilog/blocks/serv/rtl/serv_mem_if.v",
         "dir::../../verilog/blocks/serv/rtl/serv_rf_if.v",
+        "dir::../../verilog/blocks/serv/rtl/serv_rf_top.v",
+        "dir::../../verilog/blocks/serv/rtl/serv_rf_ram.v",
         "dir::../../verilog/blocks/serv/rtl/serv_rf_ram_if.v",
         "dir::../../verilog/blocks/serv/rtl/serv_alu.v",
         "dir::../../verilog/blocks/serv/rtl/serv_ctrl.v",
@@ -15,6 +17,8 @@
         "dir::../../verilog/blocks/serv/rtl/serv_bufreg.v",
         "dir::../../verilog/blocks/serv/rtl/serv_immdec.v",
         "dir::../../verilog/blocks/serv/rtl/serv_decode.v",
+        "dir::../../verilog/blocks/serv/rtl/serv_compdec.v",
+        "dir::../../verilog/blocks/serv/rtl/serv_aligner.v",
         "dir::../../verilog/blocks/serv/rtl/serv_state.v",
         "dir::../../verilog/blocks/serv/rtl/serv_csr.v",
         "dir::../../verilog/blocks/serv/servant/servant_arbiter.v",
@@ -29,7 +33,7 @@
     "FP_SIZING": "absolute",
     "DIE_AREA": "0 0 600 680",
     "PL_BASIC_PLACEMENT": 0,
-    "PL_TARGET_DENSITY": 0.55,
+    "PL_TARGET_DENSITY": 0.70,
     "SYNTH_USE_PG_PINS_DEFINES": "USE_POWER_PINS",
     "VDD_NETS": [
         "vdd"
