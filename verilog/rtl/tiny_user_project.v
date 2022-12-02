@@ -40,7 +40,7 @@ module tiny_user_project(
 );
 
 // pass input and output pins defined in user_defines.v
-gregdavill_serv_top u_mod (
+gregdavill_serv_top mod (
     io_in[15:8],
     io_out[23:16]
 );
