@@ -211,10 +211,6 @@ jobs:
           verilog/
           openlane/tiny_user_project/runs/tiny_user_project/tmp/synthesis/post_techmap.dot
         key: ${{ runner.os }}-gds-${{ github.run_id }}
-    - name: create synth svg
-      run: |
-        sudo apt-get install -yq graphviz
-        dot -Tpng openlane/tiny_user_project/runs/tiny_user_project/tmp/synthesis/post_techmap.dot > tiny_user_project_synth.png
     - name: create layout svg
       run: |
         python -m pip install gdstk
@@ -235,7 +231,6 @@ jobs:
       uses: actions/cache@v3
       with:
         path: |
-          tiny_user_project_synth.png
           tiny_user_project_layout.png
         key: ${{ runner.os }}-img-${{ github.run_id }}
 
@@ -254,7 +249,6 @@ jobs:
       uses: actions/cache@v3
       with:
         path: |
-          tiny_user_project_synth.png
           tiny_user_project_layout.png
         key: ${{ runner.os }}-img-${{ github.run_id }}
     - name: setup pages
@@ -276,8 +270,6 @@ jobs:
         PAGE_URL=${{ needs.pages.outputs.page_url }}
         PAGE_URL=$(echo "$PAGE_URL" | sed -e 's/\/$//')
         cat << EOF >> $GITHUB_STEP_SUMMARY
-        # synth
-        ![synth]($PAGE_URL/tiny_user_project_synth.png)
         # layout
         ![layout]($PAGE_URL/tiny_user_project_layout.png)
         EOF
