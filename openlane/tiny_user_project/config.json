@@ -45,7 +45,7 @@
     "RUN_CVC": 1,
     "RUN_KLAYOUT_XOR": 0,
     "RUN_KLAYOUT_DRC": 0,
-    "SYNTH_READ_BLACKBOX_LIB": 1,
+    "SYNTH_READ_BLACKBOX_LIB": 0,
     "pdk::gf180mcuC": {
         "STD_CELL_LIBRARY": "gf180mcu_fd_sc_mcu7t5v0",
         "RT_MAX_LAYER": "Metal4",
