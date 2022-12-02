@@ -41,11 +41,11 @@ module tiny_user_project(
 
 // pass input and output pins defined in user_defines.v
 gregdavill_serv_top mod (
-    io_in[15:8],
-    io_out[23:16]
+    io_in[12:8],
+    io_out[14:13]
 );
 // all output enabled
-assign io_oeb[23:16] = 8'b0;
+assign io_oeb[14:13] = 8'b0;
 
 endmodule	// tiny_user_project
 
