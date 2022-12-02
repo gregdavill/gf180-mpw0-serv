@@ -31,9 +31,9 @@
     "CLOCK_PORT": "",
     "CLOCK_NET": "",
     "FP_SIZING": "absolute",
-    "DIE_AREA": "0 0 600 680",
+    "DIE_AREA": "0 0 780 1080",
     "PL_BASIC_PLACEMENT": 0,
-    "PL_TARGET_DENSITY": 0.70,
+    "PL_TARGET_DENSITY": 0.55,
     "SYNTH_USE_PG_PINS_DEFINES": "USE_POWER_PINS",
     "VDD_NETS": [
         "vdd"
@@ -45,7 +45,7 @@
     "RUN_CVC": 1,
     "RUN_KLAYOUT_XOR": 0,
     "RUN_KLAYOUT_DRC": 0,
-    "SYNTH_READ_BLACKBOX_LIB": 0,
+    "SYNTH_READ_BLACKBOX_LIB": 1,
     "pdk::gf180mcuC": {
         "STD_CELL_LIBRARY": "gf180mcu_fd_sc_mcu7t5v0",
         "RT_MAX_LAYER": "Metal4",
