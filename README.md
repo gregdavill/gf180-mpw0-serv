@@ -1,17 +1,14 @@
-# Tiny User Project
+# GF180 MPW0 Serv
 
-Template for submitting [TinyTapeout](https://tinytapeout.com) based projects to the [Open MPW shuttle](https://developers.google.com/silicon) program.
+An award winning CPU design fit into the GF180 MPW0 Shuttle.
 
-## Usage
+To keep the design simple this project places a Serv CPU with a scan-chain around it connecting it's wishbone bus which is a combination of data and instructions out via I/O pins. 
 
-1. [Generate](https://github.com/proppy/tiny_user_project/generate) a new project based on this template
+Another I/O pin is responsible for handling clock and reset.
+Operation will run as follows:
+ 1. Using an external controller, load in default values for the wishbone bus, bring serv out of reset and clock it.
+ 2. Latch in and scan out the wishbone bus values. Handle any requests.
+ 3. Scan in data from the request and clock serv.
+ 4. Goto 2.
 
-1. [Set GitHub Pages](https://tinytapeout.com/faq/#my-github-action-is-failing-on-the-pages-part) `Sources` as `GitHub Actions`.
-
-1. Create a new [Wokwi](https://wokwi.com/projects/339800239192932947) project.
-
-1. Update [`info.yaml`](info.yaml) with your `wokwi_id` and make sure the `documentation` for `inputs` and `outputs` matches the Wokwi design.
-
-1. Commit, push and check the [![user_project_ci](https://github.com/proppy/tiny_caravel_user_project/actions/workflows/user_project_ci.yml/badge.svg)](https://github.com/proppy/tiny_caravel_user_project/actions/workflows/user_project_ci.yml) workflow summary (if successful a new commit including the hardened files will be automatically created).
-
-1. [Submit](https://platform.efabless.com/projects/create?project_definition=Open+MPW&shuttle=GFMPW-0) your project github repository to the next [Open MPW shuttle](https://platform.efabless.com/shuttles/GFMPW-0).
+In this manner we should be able to implement external peripherals like UARTs, timers, and GPIOs. The external controller can be a microcontroller, FPGA, or the caravel harness SoC.
