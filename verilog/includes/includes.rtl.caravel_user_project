@@ -3,3 +3,9 @@
 -v $(USER_PROJECT_VERILOG)/rtl/user_module.v
 
  
+# STD CELLS - they need to be below the defines.v files 
+ -v $(PDK_ROOT)/$(PDK)/libs.ref/gf180mcu_fd_sc_mcu7t5v0/verilog/gf180mcu_fd_sc_mcu7t5v0.v
+
+## STD CELLS - they need to be below the defines.v files 
+ -v $(PDK_ROOT)/$(PDK)/libs.ref/gf180mcu_fd_ip_sram/verilog/gf180mcu_fd_ip_sram__sram512x8m8wm1.v
+

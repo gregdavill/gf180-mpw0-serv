@@ -69,7 +69,7 @@ module gregdavill_serv_top(
     .PRE_REGISTER(1),
     .RESET_STRATEGY("MINI"),
     .WITH_CSR(1),
-    .RF_WIDTH(2))
+    .RF_WIDTH(8))
   u_cpu
   (
     .clk          (serv_clk),
