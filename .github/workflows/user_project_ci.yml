@@ -125,7 +125,6 @@ jobs:
         `cat openlane/user_project_wrapper/runs/user_project_wrapper/reports/manufacturability.rpt`
         \`\`\`
         EOF
-
     - name: cache gds
       uses: actions/cache@v3
       with:
@@ -141,7 +140,6 @@ jobs:
           spef/
           spi/
           verilog/
-          openlane/tiny_user_project/runs/tiny_user_project/tmp/synthesis/post_techmap.dot
         key: ${{ runner.os }}-gds-${{ github.run_id }}
 
   commit:
@@ -169,7 +167,6 @@ jobs:
           spef/
           spi/
           verilog/
-          openlane/tiny_user_project/runs/tiny_user_project/tmp/synthesis/post_techmap.dot
         key: ${{ runner.os }}-gds-${{ github.run_id }}
 
     - name: commit
@@ -185,6 +182,8 @@ jobs:
     needs: gds
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v3
+
     - name: setup python
       uses: actions/setup-python@v4
       with:
@@ -204,23 +203,26 @@ jobs:
           spef/
           spi/
           verilog/
-          openlane/tiny_user_project/runs/tiny_user_project/tmp/synthesis/post_techmap.dot
         key: ${{ runner.os }}-gds-${{ github.run_id }}
 
     - name: install KLayout
       run: |
         wget https://www.klayout.org/downloads/Ubuntu-22/klayout_0.27.13-1_amd64.deb
-        dpkg -i klayout_0.27.13-1_amd64.deb
+        sudo apt update
+        sudo apt install libqt5core5a libqt5designer5 libqt5gui5 libqt5multimedia5 libqt5multimediawidgets5 libqt5network5 libqt5opengl5 libqt5printsupport5 libqt5sql5 libqt5svg5 libqt5widgets5 libqt5xml5 libqt5xmlpatterns5
+        sudo dpkg -i klayout_0.27.13-1_amd64.deb
 
     - name: create layout png
       run: |
-        klayout -l ${{ env.PDK_ROOT }}/${{ env.PDK }}/libs.tech/klayout/tech/gf180mcu.lyp gds/tiny_user_project.gds -z -r scripts/create_svg.py
-
+        QT_QPA_PLATFORM=minimal klayout gds/tiny_user_project.gds -z -r scripts/klayout_save_image.py
+        cp layout.png layout-serv.png
+        QT_QPA_PLATFORM=minimal klayout gds/user_project_wrapper.gds -z -r scripts/klayout_save_image.py
     - name: populate img cache
       uses: actions/cache@v3
       with:
         path: |
           layout.png
+          layout-serv.png
         key: ${{ runner.os }}-img-${{ github.run_id }}
 
   pages:
@@ -239,6 +241,7 @@ jobs:
       with:
         path: |
           layout.png
+          layout-serv.png
         key: ${{ runner.os }}-img-${{ github.run_id }}
     - name: setup pages
       uses: actions/configure-pages@v2
