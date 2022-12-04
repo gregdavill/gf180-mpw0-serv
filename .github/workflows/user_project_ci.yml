@@ -71,6 +71,11 @@ jobs:
       run: |
         make serv_1
         find openlane/serv_1/runs/serv_1/
+    
+    - name: harden serv_2
+      run: |
+        make serv_2
+        find openlane/serv_2/runs/serv_2/
 
     - name: harden user_project_wrapper
       run: |

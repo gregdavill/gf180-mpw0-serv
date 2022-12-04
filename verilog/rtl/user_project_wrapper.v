@@ -77,9 +77,9 @@ serv_0 u_serv_0 (
 `endif
     // IO Pads
 
-    .io_in (io_in[12:8]),
-    .io_out(io_out[12:8]),
-    .io_oeb(io_oeb[12:8])
+    .io_in (io_in[9:5]),
+    .io_out(io_out[11:10]),
+    .io_oeb(io_oeb[11:10])
 );
 
 serv_1 u_serv_1 (
@@ -89,9 +89,21 @@ serv_1 u_serv_1 (
 `endif
     // IO Pads
 
-    .io_in (io_in[17:13]),
-    .io_out(io_out[17:13]),
-    .io_oeb(io_oeb[17:13])
+    .io_in (io_in[16:12]),
+    .io_out(io_out[18:17]),
+    .io_oeb(io_oeb[18:17])
+);
+
+serv_2 u_serv_2 (
+`ifdef USE_POWER_PINS
+    .vdd(vdd),
+    .vss(vss),
+`endif
+    // IO Pads
+
+    .io_in (io_in[23:19]),
+    .io_out(io_out[25:24]),
+    .io_oeb(io_oeb[25:24])
 );
 
 endmodule	// user_project_wrapper

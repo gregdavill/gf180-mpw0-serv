@@ -42,7 +42,8 @@ set ::env(CLOCK_PERIOD) "50"
 ### Macro PDN Connections
 set ::env(FP_PDN_MACRO_HOOKS) "\
 	u_serv_0 vdd vss vdd vss, \
-	u_serv_1 vdd vss vdd vss"
+	u_serv_1 vdd vss vdd vss, \
+	u_serv_2 vdd vss vdd vss"
 
 ### Macro Placement
 set ::env(MACRO_PLACEMENT_CFG) $::env(DESIGN_DIR)/macro.cfg
@@ -51,15 +52,18 @@ set ::env(MACRO_PLACEMENT_CFG) $::env(DESIGN_DIR)/macro.cfg
 set ::env(VERILOG_FILES_BLACKBOX) "\
 	$::env(CARAVEL_ROOT)/verilog/rtl/defines.v \
 	$::env(DESIGN_DIR)/../../verilog/rtl/serv_0.v \
-	$::env(DESIGN_DIR)/../../verilog/rtl/serv_1.v"
+	$::env(DESIGN_DIR)/../../verilog/rtl/serv_1.v \
+	$::env(DESIGN_DIR)/../../verilog/rtl/serv_2.v"
 
 set ::env(EXTRA_LEFS) "\
 	$::env(DESIGN_DIR)/../../lef/serv_0.lef \
-	$::env(DESIGN_DIR)/../../lef/serv_1.lef"
+	$::env(DESIGN_DIR)/../../lef/serv_1.lef \
+	$::env(DESIGN_DIR)/../../lef/serv_2.lef"
 
 set ::env(EXTRA_GDS_FILES) "\
 	$::env(DESIGN_DIR)/../../gds/serv_0.gds \
-	$::env(DESIGN_DIR)/../../gds/serv_1.gds"
+	$::env(DESIGN_DIR)/../../gds/serv_1.gds \
+	$::env(DESIGN_DIR)/../../gds/serv_2.gds"
 
 set ::env(RT_MAX_LAYER) {Metal4}
 
