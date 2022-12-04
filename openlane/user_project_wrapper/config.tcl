@@ -83,5 +83,13 @@ set ::env(RUN_FILL_INSERTION) 0
 set ::env(RUN_TAP_DECAP_INSERTION) 0
 set ::env(CLOCK_TREE_SYNTH) 0
 
+## DRC skips due to SRAM IP
+set ::env(MAGIC_DRC_USE_GDS) 0
+set ::env(RUN_MAGIC_DRC) 0
+set ::env(QUIT_ON_MAGIC_DRC) 0
+
+# Temporary ignore
+set ::env(QUIT_ON_LVS_ERROR) 0
+
 # YOU ARE NOT ALLOWED TO CHANGE ANY VARIABLES DEFINED IN THE FIXED WRAPPER CFGS 
 source $::env(DESIGN_DIR)/fixed_dont_change/fixed_wrapper_cfgs.tcl

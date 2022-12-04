@@ -1,5 +1,5 @@
 module serv_rf_ram
-  #(parameter width=0,
+  #(parameter width=8,
     parameter csr_regs=4,
     parameter depth=32*(32+csr_regs)/width)
    (input wire i_clk,
@@ -9,22 +9,22 @@ module serv_rf_ram
     input wire [$clog2(depth)-1:0] i_raddr,
     output wire [width-1:0] 	   o_rdata);
 
-//   reg [width-1:0] 		   memory [0:depth-1];
+  wire [width-1:0] 		 data ;
+  reg [width-1:0] 		   rdata ;
 
-   wire [width-1:0] 		 data ;
-   reg [width-1:0] 		   rdata ;
-
+  wire [$clog2(depth)-1:0] addr;
+  assign addr = i_wen ? i_waddr : i_raddr;
 
 gf180mcu_fd_ip_sram__sram256x8m8wm1 RAM0 (
 	.CLK(i_clk),
 	.CEN(1'b0), // Active LOW chip enable
 	.GWEN(~i_wen), // Active LOW Write enable
 	.WEN({8{~i_wen}}), // Active LOW
-	.A(i_wen ? i_waddr : i_raddr),
+	.A(addr),
 	.D(i_wdata),
 	.Q(data),
-	.VDD(1'b1),
-	.VSS(1'b0)
+	.VDD(),
+	.VSS()
 );
 
    /* Reads from reg x0 needs to return 0

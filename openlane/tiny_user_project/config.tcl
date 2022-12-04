@@ -20,42 +20,43 @@ set ::env(DESIGN_IS_CORE) 0
 
 set ::env(PDK) "gf180mcuC"
 set ::env(STD_CELL_LIBRARY) "gf180mcu_fd_sc_mcu7t5v0"
+set ::env(RT_MAX_LAYER) "Metal4"
 
 set ::env(RUN_KLAYOUT) 		0
-set ::env(CLOCK_TREE_SYNTH) 0
+set ::env(CLOCK_TREE_SYNTH) 1
 set ::env(CLOCK_PORT) 		{io_in[8]}
 #set ::env(CLOCK_NET) ""
-set ::env(CLOCK_PERIOD) 	"45"
+set ::env(CLOCK_PERIOD) 	50
+set ::env(SYNTH_MAX_FANOUT) 16
 
 set ::env(FP_IO_HLENGTH) 2
 set ::env(FP_IO_VLENGTH) 2
 
 ## Floorplan
 set ::env(FP_SIZING) absolute
-set ::env(DIE_AREA) "0 0 700 500"
-
+set ::env(DIE_AREA) "0 0 800 700"
 
 ## Placement
 set ::env(PL_BASIC_PLACEMENT) 0
 set ::env(PL_TARGET_DENSITY) 0.55
 
-set ::env(PL_RESIZER_DESIGN_OPTIMIZATIONS) 1
+# Enable all optimizations
+set ::env(PL_RESIZER_DESIGN_OPTIMIZATIONS) 0
 set ::env(PL_RESIZER_TIMING_OPTIMIZATIONS) 1
+set ::env(GLB_RESIZER_TIMING_OPTIMIZATIONS) 1
 
-## Diode Insertion
-set ::env(DIODE_INSERTION_STRATEGY) 		4
+# Diode insertion strategy number 4 for gf-180mcu
+set ::env(DIODE_INSERTION_STRATEGY) 4
 
-# connect to first digital rails
-set ::env(VDD_NETS) [list {VDD}]
-set ::env(GND_NETS) [list {VSS}]
+set ::env(VDD_NETS) [list {vdd}]
+set ::env(GND_NETS) [list {vss}]
 
-
-# save some time
-set ::env(RUN_KLAYOUT_XOR) 0
-set ::env(RUN_KLAYOUT_DRC) 0
-
-# don't put clock buffers on the outputs
-set ::env(PL_RESIZER_BUFFER_OUTPUT_PORTS) 0
+## Internal Macros
+### Macro PDN Connections
+set ::env(FP_PDN_MACRO_HOOKS) "\
+	mod.u_cpu.rf_ram.RAM0 vdd vss vdd vss"
+set ::env(FP_PDN_MACROS) "\
+	mod.u_cpu.rf_ram.RAM0"
     
 ## Internal Macros
 set ::env(MACRO_PLACEMENT_CFG) $script_dir/macro.cfg
@@ -91,8 +92,8 @@ set ::env(VERILOG_FILES) "\
     $::env(DESIGN_DIR)/blocks/serv/servant/servant_gpio.v"
 
 set ::env(VERILOG_FILES_BLACKBOX) "\
-	$::env(DESIGN_DIR)/rtl/gf180mcu_fd_sc_mcu7t5v0_bb.v \
-	$::env(PDK_ROOT)/$::env(PDK)/libs.ref/gf180mcu_fd_ip_sram/verilog/gf180mcu_fd_ip_sram__sram256x8m8wm1.v"
+	$::env(DESIGN_DIR)/rtl/gf180mcu_fd_sc_mcu7t5v0_bb.v"
+#	$::env(PDK_ROOT)/$::env(PDK)/libs.ref/gf180mcu_fd_ip_sram/verilog/gf180mcu_fd_ip_sram__sram256x8m8wm1.v"
 
 set ::env(EXTRA_LEFS) "\
 	$::env(PDK_ROOT)/$::env(PDK)/libs.ref/gf180mcu_fd_ip_sram/lef/gf180mcu_fd_ip_sram__sram256x8m8wm1.lef"
@@ -101,16 +102,26 @@ set ::env(EXTRA_GDS_FILES) "\
 set ::env(EXTRA_LIBS) "\
     $::env(PDK_ROOT)/$::env(PDK)/libs.ref/gf180mcu_fd_ip_sram/liberty/gf180mcu_fd_ip_sram__sram256x8m8wm1__tt_025C_1v80.lib"
 
-set ::env(FP_PDN_MACRO_HOOKS) "\
-  u_cpu.rf_ram.RAM0 VDD VSS VDD VSS
-  "
+set ::env(QUIT_ON_MISMATCHES) 0
 
-#set ::env(PDN_CFG) $script_dir/pdn.tcl
+## PDN
+set ::env(PDN_CFG) $script_dir/pdn.tcl
+set ::env(FP_PDN_ENABLE_MACROS_GRID) 1
 set ::env(FP_PDN_ENABLE_GLOBAL_CONNECTIONS) 1
+
+## PDN
+set ::env(FP_PDN_VPITCH) 30
+#set ::env(FP_PDN_HPITCH) 30
+
+set ::env(FP_PDN_VWIDTH) 3
+#set ::env(FP_PDN_CORE_RING_VWIDTH) 1.6
 
 ## LVS
 set ::env(MAGIC_DRC_USE_GDS) 0
 set ::env(RUN_MAGIC_DRC) 0
 set ::env(QUIT_ON_MAGIC_DRC) 0
 
+set ::env(RUN_CVC) 0
+
+# Temporary ignore
 set ::env(QUIT_ON_LVS_ERROR) 0
