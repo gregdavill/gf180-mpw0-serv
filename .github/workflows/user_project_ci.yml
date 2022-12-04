@@ -206,6 +206,12 @@ jobs:
           verilog/
           openlane/tiny_user_project/runs/tiny_user_project/tmp/synthesis/post_techmap.dot
         key: ${{ runner.os }}-gds-${{ github.run_id }}
+
+    - name: install KLayout
+      run: |
+        wget https://www.klayout.org/downloads/Ubuntu-22/klayout_0.27.13-1_amd64.deb
+        dpkg -i klayout_0.27.13-1_amd64.deb
+
     - name: create layout png
       run: |
         klayout -l ${{ env.PDK_ROOT }}/${{ env.PDK }}/libs.tech/klayout/tech/gf180mcu.lyp gds/tiny_user_project.gds -z -r scripts/create_svg.py
