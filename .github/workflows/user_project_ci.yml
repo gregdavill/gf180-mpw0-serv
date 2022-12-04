@@ -206,27 +206,15 @@ jobs:
           verilog/
           openlane/tiny_user_project/runs/tiny_user_project/tmp/synthesis/post_techmap.dot
         key: ${{ runner.os }}-gds-${{ github.run_id }}
-    - name: create layout svg
+    - name: create layout png
       run: |
-        python -m pip install gdstk
-        python << EOF
-        import gdstk
-        library = gdstk.read_gds('gds/tiny_user_project.gds')
-        top_cells = library.top_level()
-        top_cells[0].write_svg('tiny_user_project_layout.svg')
-        EOF
-    - name: convert to png
-      run: |
-        python -m pip install cairosvg
-        python << EOF
-        import cairosvg
-        cairosvg.svg2png(url='tiny_user_project_layout.svg', write_to='tiny_user_project_layout.png')
-        EOF
+        klayout -l ${{ env.PDK_ROOT }}/${{ env.PDK }}/libs.tech/klayout/tech/gf180mcu.lyp gds/tiny_user_project.gds -z -r scripts/create_svg.py
+
     - name: populate img cache
       uses: actions/cache@v3
       with:
         path: |
-          tiny_user_project_layout.png
+          layout.png
         key: ${{ runner.os }}-img-${{ github.run_id }}
 
   pages:
@@ -244,7 +232,7 @@ jobs:
       uses: actions/cache@v3
       with:
         path: |
-          tiny_user_project_layout.png
+          layout.png
         key: ${{ runner.os }}-img-${{ github.run_id }}
     - name: setup pages
       uses: actions/configure-pages@v2
@@ -266,5 +254,5 @@ jobs:
         PAGE_URL=$(echo "$PAGE_URL" | sed -e 's/\/$//')
         cat << EOF >> $GITHUB_STEP_SUMMARY
         # layout
-        ![layout]($PAGE_URL/tiny_user_project_layout.png)
+        ![layout]($PAGE_URL/layout.png)
         EOF
