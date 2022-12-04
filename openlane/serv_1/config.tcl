@@ -36,7 +36,7 @@ set ::env(FP_IO_VLENGTH) 2
 
 ## Floorplan
 set ::env(FP_SIZING) absolute
-set ::env(DIE_AREA) "0 0 700 600"
+set ::env(DIE_AREA) "0 0 1000 600"
 
 ## Placement
 set ::env(PL_BASIC_PLACEMENT) 0
