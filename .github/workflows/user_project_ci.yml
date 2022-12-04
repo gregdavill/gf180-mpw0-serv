@@ -62,37 +62,15 @@ jobs:
       with:
         python-version: '3.10'
 
-    - name: harden tiny_user_project
+    - name: harden serv_0
       run: |
-        make tiny_user_project
-        find openlane/tiny_user_project/runs/tiny_user_project/
+        make serv_0
+        find openlane/serv_0/runs/serv_0/
 
-    - name: show tiny_user_project metrics
+    - name: harden serv_1
       run: |
-        python << EOF >> $GITHUB_STEP_SUMMARY
-        import csv
-        import pathlib
-
-        print('# tiny_user_project')
-        print('## metrics')
-        metrics = pathlib.Path('openlane/tiny_user_project/runs/tiny_user_project/reports/metrics.csv')
-        with metrics.open() as f:
-            d = list(csv.DictReader(f))[0]
-            print('key|value')
-            print('---|-----')
-            for k,v in d.items():
-              print(f'{k}|{v}')
-        EOF
-
-    - name: show tiny_user_project reports
-      run: |
-        cat << EOF >> $GITHUB_STEP_SUMMARY
-        ## manufacturability
-
-        \`\`\`
-        `cat openlane/tiny_user_project/runs/tiny_user_project/reports/manufacturability.rpt`
-        \`\`\`
-        EOF
+        make serv_1
+        find openlane/serv_1/runs/serv_1/
 
     - name: harden user_project_wrapper
       run: |
@@ -214,8 +192,8 @@ jobs:
 
     - name: create layout png
       run: |
-        QT_QPA_PLATFORM=minimal klayout gds/tiny_user_project.gds -z -r scripts/klayout_save_image.py
-        cp layout.png layout-serv.png
+        QT_QPA_PLATFORM=minimal klayout gds/serv_0.gds -z -r scripts/klayout_save_image.py
+        cp layout.png layout-serv0.png
         QT_QPA_PLATFORM=minimal klayout gds/user_project_wrapper.gds -z -r scripts/klayout_save_image.py
     - name: populate img cache
       uses: actions/cache@v3

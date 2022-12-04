@@ -70,41 +70,28 @@ module user_project_wrapper #(
 /* User project is instantiated  here   */
 /*--------------------------------------*/
 
-tiny_user_project mprj (
+serv_0 u_serv_0 (
 `ifdef USE_POWER_PINS
     .vdd(vdd),
     .vss(vss),
 `endif
-
-    // MGMT SoC Wishbone Slave
-
-    .wb_clk_i(wb_clk_i),
-    .wb_rst_i(wb_rst_i),
-    .wbs_stb_i(wbs_stb_i),
-    .wbs_cyc_i(wbs_cyc_i),
-    .wbs_we_i(wbs_we_i),
-    .wbs_sel_i(wbs_sel_i),
-    .wbs_dat_i(wbs_dat_i),
-    .wbs_adr_i(wbs_adr_i),
-    .wbs_ack_o(wbs_ack_o),
-    .wbs_dat_o(wbs_dat_o),
-
-    // Logic Analyzer
-
-    .la_data_in(la_data_in),
-    .la_data_out(la_data_out),
-    .la_oenb (la_oenb),
-
     // IO Pads
 
-    .io_in (io_in),
-    .io_out(io_out),
-    .io_oeb(io_oeb),
+    .io_in (io_in[12:8]),
+    .io_out(io_out[12:8]),
+    .io_oeb(io_oeb[12:8])
+);
 
-    .user_clock2(user_clock2),
+serv_1 u_serv_1 (
+`ifdef USE_POWER_PINS
+    .vdd(vdd),
+    .vss(vss),
+`endif
+    // IO Pads
 
-    // IRQ
-    .user_irq(user_irq)
+    .io_in (io_in[17:13]),
+    .io_out(io_out[17:13]),
+    .io_oeb(io_oeb[17:13])
 );
 
 endmodule	// user_project_wrapper

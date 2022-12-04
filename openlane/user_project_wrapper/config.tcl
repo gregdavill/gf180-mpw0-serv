@@ -33,15 +33,16 @@ set ::env(VERILOG_FILES) "\
 	$::env(DESIGN_DIR)/../../verilog/rtl/user_project_wrapper.v"
 
 ## Clock configurations
-set ::env(CLOCK_PORT) "user_clock2"
-set ::env(CLOCK_NET) "mprj.clk"
+set ::env(CLOCK_PORT) {io[8]}
+set ::env(CLOCK_NET) ""
 
 set ::env(CLOCK_PERIOD) "50"
 
 ## Internal Macros
 ### Macro PDN Connections
 set ::env(FP_PDN_MACRO_HOOKS) "\
-	mprj vdd vss vdd vss"
+	u_serv_0 vdd vss vdd vss, \
+	u_serv_1 vdd vss vdd vss"
 
 ### Macro Placement
 set ::env(MACRO_PLACEMENT_CFG) $::env(DESIGN_DIR)/macro.cfg
@@ -49,13 +50,16 @@ set ::env(MACRO_PLACEMENT_CFG) $::env(DESIGN_DIR)/macro.cfg
 ### Black-box verilog and views
 set ::env(VERILOG_FILES_BLACKBOX) "\
 	$::env(CARAVEL_ROOT)/verilog/rtl/defines.v \
-	$::env(DESIGN_DIR)/../../verilog/rtl/tiny_user_project.v"
+	$::env(DESIGN_DIR)/../../verilog/rtl/serv_0.v \
+	$::env(DESIGN_DIR)/../../verilog/rtl/serv_1.v"
 
 set ::env(EXTRA_LEFS) "\
-	$::env(DESIGN_DIR)/../../lef/tiny_user_project.lef"
+	$::env(DESIGN_DIR)/../../lef/serv_0.lef \
+	$::env(DESIGN_DIR)/../../lef/serv_1.lef"
 
 set ::env(EXTRA_GDS_FILES) "\
-	$::env(DESIGN_DIR)/../../gds/tiny_user_project.gds"
+	$::env(DESIGN_DIR)/../../gds/serv_0.gds \
+	$::env(DESIGN_DIR)/../../gds/serv_1.gds"
 
 set ::env(RT_MAX_LAYER) {Metal4}
 
@@ -84,8 +88,6 @@ set ::env(MAGIC_DRC_USE_GDS) 0
 set ::env(QUIT_ON_MAGIC_DRC) 0
 set ::env(RUN_MAGIC_DRC) 0
 
-# Temporary ignore
-set ::env(QUIT_ON_LVS_ERROR) 0
 
 # YOU ARE NOT ALLOWED TO CHANGE ANY VARIABLES DEFINED IN THE FIXED WRAPPER CFGS 
 source $::env(DESIGN_DIR)/fixed_dont_change/fixed_wrapper_cfgs.tcl
