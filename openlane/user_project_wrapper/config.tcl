@@ -36,11 +36,7 @@ set ::env(VERILOG_FILES) "\
 set ::env(CLOCK_PORT) "user_clock2"
 set ::env(CLOCK_NET) "mprj.clk"
 
-set ::env(CLOCK_PERIOD) "24"
-
-set ::env(VDD_NETS) [list {vdd}]
-set ::env(GND_NETS) [list {vss}]
-set ::env(SYNTH_USE_PG_PINS_DEFINES) "USE_POWER_PINS"
+set ::env(CLOCK_PERIOD) "50"
 
 ## Internal Macros
 ### Macro PDN Connections
@@ -52,7 +48,7 @@ set ::env(MACRO_PLACEMENT_CFG) $::env(DESIGN_DIR)/macro.cfg
 
 ### Black-box verilog and views
 set ::env(VERILOG_FILES_BLACKBOX) "\
-	$::env(DESIGN_DIR)/../../verilog/rtl/defines.v \
+	$::env(CARAVEL_ROOT)/verilog/rtl/defines.v \
 	$::env(DESIGN_DIR)/../../verilog/rtl/tiny_user_project.v"
 
 set ::env(EXTRA_LEFS) "\
@@ -85,8 +81,8 @@ set ::env(CLOCK_TREE_SYNTH) 0
 
 ## DRC skips due to SRAM IP
 set ::env(MAGIC_DRC_USE_GDS) 0
-set ::env(RUN_MAGIC_DRC) 0
 set ::env(QUIT_ON_MAGIC_DRC) 0
+set ::env(RUN_MAGIC_DRC) 0
 
 # Temporary ignore
 set ::env(QUIT_ON_LVS_ERROR) 0

@@ -20,9 +20,9 @@ set ::env(DESIGN_IS_CORE) 0
 
 set ::env(PDK) "gf180mcuC"
 set ::env(STD_CELL_LIBRARY) "gf180mcu_fd_sc_mcu7t5v0"
-set ::env(RT_MAX_LAYER) "Metal4"
+set ::env(RT_MAX_LAYER) {Metal4}
 
-set ::env(RUN_KLAYOUT) 		0
+#set ::env(RUN_KLAYOUT) 		0
 set ::env(CLOCK_TREE_SYNTH) 1
 set ::env(CLOCK_PORT) 		{io_in[8]}
 #set ::env(CLOCK_NET) ""
@@ -34,7 +34,7 @@ set ::env(FP_IO_VLENGTH) 2
 
 ## Floorplan
 set ::env(FP_SIZING) absolute
-set ::env(DIE_AREA) "0 0 800 700"
+set ::env(DIE_AREA) "0 0 700 600"
 
 ## Placement
 set ::env(PL_BASIC_PLACEMENT) 0
@@ -57,7 +57,9 @@ set ::env(FP_PDN_MACRO_HOOKS) "\
 	mod.u_cpu.rf_ram.RAM0 vdd vss vdd vss"
 set ::env(FP_PDN_MACROS) "\
 	mod.u_cpu.rf_ram.RAM0"
-    
+
+set ::env(FP_PIN_ORDER_CFG) $::env(DESIGN_DIR)/pin_order.cfg
+
 ## Internal Macros
 set ::env(MACRO_PLACEMENT_CFG) $script_dir/macro.cfg
 
@@ -92,8 +94,8 @@ set ::env(VERILOG_FILES) "\
     $::env(DESIGN_DIR)/blocks/serv/servant/servant_gpio.v"
 
 set ::env(VERILOG_FILES_BLACKBOX) "\
-	$::env(DESIGN_DIR)/rtl/gf180mcu_fd_sc_mcu7t5v0_bb.v"
-#	$::env(PDK_ROOT)/$::env(PDK)/libs.ref/gf180mcu_fd_ip_sram/verilog/gf180mcu_fd_ip_sram__sram256x8m8wm1.v"
+	$::env(DESIGN_DIR)/rtl/gf180mcu_fd_sc_mcu7t5v0_bb.v \
+	$::env(PDK_ROOT)/$::env(PDK)/libs.ref/gf180mcu_fd_ip_sram/verilog/gf180mcu_fd_ip_sram__sram256x8m8wm1.v"
 
 set ::env(EXTRA_LEFS) "\
 	$::env(PDK_ROOT)/$::env(PDK)/libs.ref/gf180mcu_fd_ip_sram/lef/gf180mcu_fd_ip_sram__sram256x8m8wm1.lef"
@@ -113,15 +115,16 @@ set ::env(FP_PDN_ENABLE_GLOBAL_CONNECTIONS) 1
 set ::env(FP_PDN_VPITCH) 30
 #set ::env(FP_PDN_HPITCH) 30
 
-set ::env(FP_PDN_VWIDTH) 3
-#set ::env(FP_PDN_CORE_RING_VWIDTH) 1.6
+#set ::env(FP_PDN_VWIDTH) 3
+#set ::env(FP_PDN_CORE_RING) 0
 
 ## LVS
 set ::env(MAGIC_DRC_USE_GDS) 0
+set ::env(MAGIC_WRITE_FULL_LEF) 0
 set ::env(RUN_MAGIC_DRC) 0
 set ::env(QUIT_ON_MAGIC_DRC) 0
 
-set ::env(RUN_CVC) 0
+set ::env(RUN_CVC) 1
 
 # Temporary ignore
 set ::env(QUIT_ON_LVS_ERROR) 0
