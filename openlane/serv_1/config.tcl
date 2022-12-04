@@ -27,7 +27,9 @@ set ::env(CLOCK_TREE_SYNTH) 1
 set ::env(CLOCK_PORT) ""
 set ::env(CLOCK_NET) {clk serv_clk}
 set ::env(CLOCK_PERIOD) 	50
-set ::env(SYNTH_MAX_FANOUT) 16
+set ::env(SYNTH_MAX_FANOUT) 5
+set ::env(SYNTH_SIZING) 1
+set ::env(CLOCK_BUFFER_FANOUT) 20
 
 set ::env(FP_IO_HLENGTH) 2
 set ::env(FP_IO_VLENGTH) 2
@@ -41,7 +43,7 @@ set ::env(PL_BASIC_PLACEMENT) 0
 set ::env(PL_TARGET_DENSITY) 0.55
 
 # Enable all optimizations
-set ::env(PL_RESIZER_DESIGN_OPTIMIZATIONS) 0
+set ::env(PL_RESIZER_DESIGN_OPTIMIZATIONS) 1
 set ::env(PL_RESIZER_TIMING_OPTIMIZATIONS) 1
 set ::env(GLB_RESIZER_TIMING_OPTIMIZATIONS) 1
 
