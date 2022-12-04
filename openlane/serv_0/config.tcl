@@ -24,8 +24,8 @@ set ::env(RT_MAX_LAYER) {Metal4}
 
 #set ::env(RUN_KLAYOUT) 		0
 set ::env(CLOCK_TREE_SYNTH) 1
-set ::env(CLOCK_PORT) 		{io_in[8] io_in[12]}
-#set ::env(CLOCK_NET) ""
+set ::env(CLOCK_PORT) ""
+set ::env(CLOCK_NET) {clk serv_clk}
 set ::env(CLOCK_PERIOD) 	50
 set ::env(SYNTH_MAX_FANOUT) 16
 
