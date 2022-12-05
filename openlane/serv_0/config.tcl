@@ -98,7 +98,9 @@ set ::env(VERILOG_FILES_BLACKBOX) "\
 set ::env(EXTRA_LEFS) "\
 	$::env(PDK_ROOT)/$::env(PDK)/libs.ref/gf180mcu_fd_ip_sram/lef/gf180mcu_fd_ip_sram__sram256x8m8wm1.lef"
 set ::env(EXTRA_GDS_FILES) "\
-    $::env(PDK_ROOT)/$::env(PDK)/libs.ref/gf180mcu_fd_ip_sram/gds/gf180mcu_fd_ip_sram__sram256x8m8wm1.gds"
+    $::env(DESIGN_DIR)/../sram/gds/gf180mcu_fd_ip_sram__sram256x8m8wm1.gds" 
+# Need local copy with slightly expanded `V5_Xtor` on right side.
+#    $::env(PDK_ROOT)/$::env(PDK)/libs.ref/gf180mcu_fd_ip_sram/gds/gf180mcu_fd_ip_sram__sram256x8m8wm1.gds"
 set ::env(EXTRA_LIBS) "\
     $::env(PDK_ROOT)/$::env(PDK)/libs.ref/gf180mcu_fd_ip_sram/liberty/gf180mcu_fd_ip_sram__sram256x8m8wm1__tt_025C_1v80.lib"
 
