@@ -36,7 +36,7 @@ set ::env(FP_IO_VLENGTH) 2
 
 ## Floorplan
 set ::env(FP_SIZING) absolute
-set ::env(DIE_AREA) "0 0 700 600"
+set ::env(DIE_AREA) "0 0 1000 600"
 
 ## Placement
 set ::env(PL_BASIC_PLACEMENT) 0
@@ -71,13 +71,13 @@ set ::env(VERILOG_FILES) "\
     $::env(DESIGN_DIR)/rtl/defines.v \
 	$::env(DESIGN_DIR)/rtl/serv_0.v \
 	$::env(DESIGN_DIR)/rtl/serv_rf_ram_gf180.v \
+	$::env(DESIGN_DIR)/rtl/serv_rf_spram_if.v \
     $::env(DESIGN_DIR)/rtl/scanchain_gf180.v \
     $::env(DESIGN_DIR)/blocks/serv/rtl/serv_top.v \
     $::env(DESIGN_DIR)/blocks/serv/rtl/serv_synth_wrapper.v \
     $::env(DESIGN_DIR)/blocks/serv/rtl/serv_mem_if.v \
     $::env(DESIGN_DIR)/blocks/serv/rtl/serv_rf_if.v \
     $::env(DESIGN_DIR)/blocks/serv/rtl/serv_rf_top.v \
-    $::env(DESIGN_DIR)/blocks/serv/rtl/serv_rf_ram_if.v \
     $::env(DESIGN_DIR)/blocks/serv/rtl/serv_alu.v \
     $::env(DESIGN_DIR)/blocks/serv/rtl/serv_ctrl.v \
     $::env(DESIGN_DIR)/blocks/serv/rtl/serv_bufreg2.v \

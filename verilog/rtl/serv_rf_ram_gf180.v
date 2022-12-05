@@ -9,8 +9,7 @@ module serv_rf_ram
     input wire [$clog2(depth)-1:0] i_raddr,
     output wire [width-1:0] 	   o_rdata);
 
-  wire [width-1:0] 		 data ;
-  reg [width-1:0] 		   rdata ;
+  wire [width-1:0] 		   rdata ;
 
   wire [$clog2(depth)-1:0] addr;
   assign addr = i_wen ? i_waddr : i_raddr;
@@ -22,9 +21,9 @@ gf180mcu_fd_ip_sram__sram256x8m8wm1 RAM0 (
 	.WEN({8{~i_wen}}), // Active LOW
 	.A(addr),
 	.D(i_wdata),
-	.Q(data),
-	.VDD(),
-	.VSS()
+	.Q(rdata),
+	.VDD(1'b1),
+	.VSS(1'b0)
 );
 
    /* Reads from reg x0 needs to return 0
@@ -42,10 +41,6 @@ gf180mcu_fd_ip_sram__sram256x8m8wm1 RAM0 (
    always @(posedge i_clk)
      regzero <= !(|i_raddr[$clog2(depth)-1:5-$clog2(width)]);
 
-   always @(posedge i_clk)
-     if(~i_wen)
-       rdata <= data;
-
-   assign o_rdata = (i_wen ? rdata : data) & ~{width{regzero}};
+   assign o_rdata = rdata & ~{width{regzero}};
 
 endmodule
