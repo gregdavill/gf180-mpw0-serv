@@ -1,7 +1,7 @@
 magic
 tech gf180mcuC
 magscale 1 5
-timestamp 1670233705
+timestamp 1670237842
 << obsm1 >>
 rect 672 1538 69328 58438
 << obsm2 >>
@@ -194,8 +194,8 @@ port 17 nsew ground bidirectional
 string FIXED_BBOX 0 0 70000 60000
 string LEFclass BLOCK
 string LEFview TRUE
-string GDS_END 8619982
-string GDS_FILE /home/runner/work/gf180-mpw0-serv/gf180-mpw0-serv/openlane/serv_0/runs/22_12_05_09_45/results/signoff/serv_0.magic.gds
-string GDS_START 2826198
+string GDS_END 28066146
+string GDS_FILE /home/runner/work/gf180-mpw0-serv/gf180-mpw0-serv/openlane/serv_0/runs/22_12_05_10_54/results/signoff/serv_0.magic.gds
+string GDS_START 22272362
 << end >>
 
