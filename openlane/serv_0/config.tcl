@@ -110,7 +110,7 @@ set ::env(FP_PDN_ENABLE_MACROS_GRID) 1
 set ::env(FP_PDN_ENABLE_GLOBAL_CONNECTIONS) 1
 
 ## PDN
-set ::env(FP_PDN_VPITCH) 30
+set ::env(FP_PDN_VPITCH) 45
 #set ::env(FP_PDN_HPITCH) 30
 
 #set ::env(FP_PDN_VWIDTH) 3
